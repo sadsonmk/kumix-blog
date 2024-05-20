@@ -1,6 +1,8 @@
+// Define the schema for the blog collection in the database
 const mongoose = require('mongoose');
 
-const BlogSchema = new mongoose.Schema({
+const Schema = mongoose.Schema;
+const BlogSchema = new Schema({
     title: {
         type: String,
         required: true

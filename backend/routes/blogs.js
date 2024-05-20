@@ -1,4 +1,5 @@
 const express = require('express');
+const Blog = require('../models/blogModel');
 
 const router = express.Router();
 
@@ -13,8 +14,14 @@ router.get('/:id', (req, res) => {
 })
 
 // POST a new blog
-router.post('/', (req, res) => {
-    res.json({message: 'POST a new blog'});
+router.post('/', async (req, res) => {
+    const {title, author, content} = req.body;
+    try{
+       const blog = await Blog.create({title, author, content});
+       res.status(200).json(blog);
+    }catch(err){
+        res.status(400).json({ error: err.message });
+    }
 })
 
 // PATCH updated data to a specific blog
