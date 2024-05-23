@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import './Create.css'
+import { useBlogsContext } from '../hooks/useBlogsContext'
 
 const Create = () => {
+    const { dispatch } = useBlogsContext()
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
     const [content, setContent] = useState('')
@@ -24,6 +26,7 @@ const Create = () => {
         if (response.ok) {
             setError(null)
             console.log('Blog added successfully', json)
+            dispatch({ type: 'CREATE_BLOG', payload: json })
         }
         setTitle('')
         setAuthor('')

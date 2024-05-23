@@ -129,3 +129,36 @@ header a:hover {
   right: 0;
 }
 
+/* nav links styles */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+nav ul li {
+  margin: 0 10px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+}
+
+nav ul li a:hover {
+  color: gray;
+}
+
+/* delete blog span */
+.blog-details span {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+  /* float: right; */
+}
