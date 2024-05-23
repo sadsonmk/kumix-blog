@@ -24,6 +24,7 @@ export const blogsReducer = (state, action) => {
 export const BlogsContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(blogsReducer, { blogs: null})
 
+    console.log('Blog Context',state)
 
     return (
         <BlogsContext.Provider value={{...state, dispatch}}>
