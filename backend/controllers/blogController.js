@@ -44,11 +44,11 @@ const updateBlog = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: 'Blog not found' });
     }
-    const blog = await Blog.findByIdAndUpdate(id, { ...req.body });
+    const blog = await Blog.findByIdAndUpdate(id, { ...req.body }, { new: true });
     if (!blog) {
         return res.status(404).json({ error: 'Blog not found' });
     }
-    return res.status(200).json({ message: 'Blog updated successfully' });
+    return res.status(200).json(blog);
 }
 
 // DELETE a specific blog
@@ -62,7 +62,7 @@ const deleteBlog = async (req, res) => {
     if (!blog) {
         return res.status(404).json({ error: 'Blog not found' });
     }
-    return res.status(200).json({ message: 'Blog deleted successfully' });
+    return res.status(200).json(blog);
 };
 
 module.exports = {

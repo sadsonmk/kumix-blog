@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './Create.css'
 import { useBlogsContext } from '../hooks/useBlogsContext'
 
+
 const Create = () => {
     const { dispatch } = useBlogsContext()
     const [title, setTitle] = useState('')
@@ -21,16 +22,16 @@ const Create = () => {
 
         if(!response.ok) {
             setError(json.error)
-            return
         }
         if (response.ok) {
+            setTitle('')
+            setAuthor('')
+            setContent('')
             setError(null)
             console.log('Blog added successfully', json)
             dispatch({ type: 'CREATE_BLOG', payload: json })
         }
-        setTitle('')
-        setAuthor('')
-        setContent('')
+
     }
 
   return (
@@ -76,7 +77,7 @@ const Create = () => {
       </div>
     </div>
     <div className="row">
-      <input type="submit" value="Submit" />
+    <input type="submit" value="Submit" />
     </div>
 
     {error && <div className="alert">

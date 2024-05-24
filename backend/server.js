@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const blogsRoutes = require('./routes/blogs');
+const usersRoutes = require('./routes/users');
 
 // create an express app
 const app = express();
@@ -14,6 +15,7 @@ app.use((req, res, next) => {
 })
 // use the blogsRoutes
 app.use('/blogs', blogsRoutes);
+app.use('/user', usersRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
 .then(() => {

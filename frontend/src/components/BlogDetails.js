@@ -38,7 +38,7 @@ const BlogDetails = ({ blog }) => {
     <MDBCard alignment='center'>
       <MDBCardHeader>Tip</MDBCardHeader>
       <MDBCardBody>
-        <MDBCardTitle>{blog.Title}</MDBCardTitle>
+        <MDBCardTitle>{blog.title}</MDBCardTitle>
         <MDBCardText>{blog.content}</MDBCardText>
         <MDBCardSubTitle>author: {blog.author}</MDBCardSubTitle>
         <MDBBtn onClick={handleClick}>delete</MDBBtn>
