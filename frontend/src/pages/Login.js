@@ -1,14 +1,16 @@
 import { useState } from 'react'
+import { useLogin } from '../hooks/useLogin'
 
 const Login = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const { login, error, loading } = useLogin()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        console.log(email, password)
+        await login(email, password)
 
     }
 
@@ -41,8 +43,11 @@ const Login = () => {
       </div>
     </div>
     <div className="row">
-      <input type="submit" value="Login" />
+      <input type="submit" value="Login" disabled={loading} />
     </div>
+    {error && <div className="alert">
+    <span className="closebtn" onClick={(e) => e.target.parentElement.style.display='none'}>&times;</span>
+  <strong>{error}</strong> </div>}
   </form>
 </div>
   )

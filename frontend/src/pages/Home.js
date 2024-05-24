@@ -10,7 +10,7 @@ const Home = () => {
             const res = await fetch('/blogs')
             const data = await res.json()
             if (res.ok) {
-                dispatch({ type: 'GET_BLOGS', payload: data})
+                dispatch({ type: 'SET_BLOGS', payload: data})
             }
         }
         fetchBlogs()
