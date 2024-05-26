@@ -20,7 +20,7 @@ const Home = () => {
         <HeroSection />
         <div className='blogs'>
             {blogs && blogs.map(blog => (
-                <BlogDetails key={blog._id} blog={blog} showDeleteButton={false}/>
+                <BlogDetails key={blog._id} blog={blog} />
             ))}
         </div>
     </div>

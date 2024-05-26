@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import About from './pages/About';
 import MyBlogs from './pages/MyBlogs';
+import BlogPage from './pages/BlogPage';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
             <Route path='/signup' element={<Signup />} />
             <Route path='/about' element={<About />} />
             <Route path='/myblogs' element={<MyBlogs />} />
+            <Route path='/blog/:id' element={<BlogPage />} />
           </Routes>
         </div>
         <Footer />

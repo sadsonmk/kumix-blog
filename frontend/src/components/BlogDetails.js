@@ -8,27 +8,28 @@ import {
   MDBCardFooter,
   MDBBtn
 } from 'mdb-react-ui-kit';
+import { Link } from 'react-router-dom'
 
-import { useBlogsContext } from '../hooks/useBlogsContext'
-import { useAuthContext } from '../hooks/useAuthContext'
+// import { useBlogsContext } from '../hooks/useBlogsContext'
+// import { useAuthContext } from '../hooks/useAuthContext'
 
-const BlogDetails = ({ blog, showDeleteButton }) => {
-  const { dispatch } = useBlogsContext()
-  const { user } = useAuthContext()
+const BlogDetails = ({ blog }) => {
+  // const { dispatch } = useBlogsContext()
+  // const { user } = useAuthContext()
 
-  const handleClick = async () => {
+  // const handleClick = async () => {
 
-    const res = await fetch('/blogs/' + blog._id, {
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${user.token}`
-      }
-    })
-    const data = await res.json()
-    if (res.ok) {
-      dispatch({ type: 'DELETE_BLOG', payload: data })
-    }
-  }
+  //   const res = await fetch('/blogs/' + blog._id, {
+  //     method: 'DELETE',
+  //     headers: {
+  //       'Authorization': `Bearer ${user.token}`
+  //     }
+  //   })
+  //   const data = await res.json()
+  //   if (res.ok) {
+  //     dispatch({ type: 'DELETE_BLOG', payload: data })
+  //   }
+  // }
 
 
   return (
@@ -46,7 +47,10 @@ const BlogDetails = ({ blog, showDeleteButton }) => {
         <MDBCardTitle>{blog.title}</MDBCardTitle>
         <MDBCardText>{blog.content}</MDBCardText>
         <MDBCardSubTitle>author: {blog.author}</MDBCardSubTitle>
-        {showDeleteButton && user && <MDBBtn onClick={handleClick}>delete</MDBBtn>}
+        {/* {showDeleteButton && user && <MDBBtn onClick={handleClick}>delete</MDBBtn>} */}
+        <Link to={`/blog/${blog._id}`}>
+          <MDBBtn>Read more...</MDBBtn>
+        </Link>
       </MDBCardBody>
       <MDBCardFooter className='text-muted'>2 days ago</MDBCardFooter>
     </MDBCard>

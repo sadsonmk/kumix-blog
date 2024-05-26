@@ -34,7 +34,7 @@ const MyBlogs = () => {
 
             <div className='blogs'>
                 {displayedBlogs && displayedBlogs.map(blog => (
-                    <BlogDetails key={blog._id} blog={blog} showDeleteButton={true}/>
+                    <BlogDetails key={blog._id} blog={blog} />
                 ))}
             </div>
         </div>
