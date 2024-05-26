@@ -1,17 +1,33 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './Create.css'
 import { useBlogsContext } from '../hooks/useBlogsContext'
+import { useAuthContext } from '../hooks/useAuthContext'
+import { useNavigate } from 'react-router-dom';
 
 
 const Create = () => {
+    const { user } = useAuthContext()
     const { dispatch } = useBlogsContext()
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
     const [content, setContent] = useState('')
     const [error, setError] = useState(null)
 
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (!user) {
+            navigate('/login');
+        }
+    }, [user, navigate]);
+
     const handleSubmitBlog = async (ev) => {
         ev.preventDefault()
+
+        if (!user) {
+            setError('You must be logged in to create a blog')
+            return
+        }
+
         const blog = { title, author, content }
         const response = await fetch('/blogs', {
             method: 'POST',

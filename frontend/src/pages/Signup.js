@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './Create.css'
 import { useSignup } from '../hooks/useSignup'
+import { Link } from 'react-router-dom'
 
 const Signup = () => {
 
@@ -43,8 +44,9 @@ const Signup = () => {
         />
       </div>
     </div>
-    <div className="row">
+    <div className="row" >
       <input type="submit" value="Sign Up" disabled={loading}/>
+      <Link to="/login">Already have an account? Sign in</Link>
     </div>
     {error && <div className="alert">
     <span className="closebtn" onClick={(e) => e.target.parentElement.style.display='none'}>&times;</span>

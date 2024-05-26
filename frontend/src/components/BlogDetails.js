@@ -10,9 +10,11 @@ import {
 } from 'mdb-react-ui-kit';
 
 import { useBlogsContext } from '../hooks/useBlogsContext'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const BlogDetails = ({ blog }) => {
   const { dispatch } = useBlogsContext()
+  const { user } = useAuthContext()
 
   const handleClick = async () => {
 
@@ -41,7 +43,7 @@ const BlogDetails = ({ blog }) => {
         <MDBCardTitle>{blog.title}</MDBCardTitle>
         <MDBCardText>{blog.content}</MDBCardText>
         <MDBCardSubTitle>author: {blog.author}</MDBCardSubTitle>
-        <MDBBtn onClick={handleClick}>delete</MDBBtn>
+        {user && <MDBBtn onClick={handleClick}>delete</MDBBtn>}
       </MDBCardBody>
       <MDBCardFooter className='text-muted'>2 days ago</MDBCardFooter>
     </MDBCard>
