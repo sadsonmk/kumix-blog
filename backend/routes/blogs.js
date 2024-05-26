@@ -5,6 +5,7 @@ const {
     getBlog,
     updateBlog,
     deleteBlog
+
 } = require('../controllers/blogController');
 const authRequire = require('../middleware/authRequire');
 
@@ -21,6 +22,7 @@ router.get('/:id', getBlog)
 router.use(authRequire);
 // POST a new blog
 router.post('/', createBlog)
+
 
 // PATCH updated data to a specific blog
 router.patch('/:id', updateBlog)

@@ -11,6 +11,7 @@ const getAllBlogs = async (req, res) => {
     }
 };
 
+
 // GET a specific blog
 const getBlog = async (req, res) => {
     const { id } = req.params;
@@ -30,7 +31,7 @@ const getBlog = async (req, res) => {
 const createBlog = async (req, res) => {
     const {title, author, content} = req.body;
     try{
-       const blog = await Blog.create({title, author, content});
+       const blog = await Blog.create({title, author, content, userId: req.user._id});
        res.status(200).json(blog);
     }catch(err){
         res.status(400).json({ error: err.message });
@@ -70,5 +71,5 @@ module.exports = {
     getAllBlogs,
     getBlog,
     deleteBlog,
-    updateBlog,
+    updateBlog
 };
