@@ -13,12 +13,13 @@ const Create = () => {
     const [content, setContent] = useState('')
     const [error, setError] = useState(null)
 
+    const token = localStorage.getItem('user')
     const navigate = useNavigate();
     useEffect(() => {
-        if (!user) {
+        if (!token) {
             navigate('/login');
         }
-    }, [user, navigate]);
+    }, [token, navigate]);
 
     const handleSubmitBlog = async (ev) => {
         ev.preventDefault()
@@ -28,10 +29,13 @@ const Create = () => {
             return
         }
 
+
         const blog = { title, author, content }
         const response = await fetch('/blogs', {
             method: 'POST',
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json",
+              'Authorization': `Bearer ${JSON.parse(token).token}`
+             },
             body: JSON.stringify(blog)
         })
         const json = await response.json()
@@ -46,6 +50,7 @@ const Create = () => {
             setError(null)
             console.log('Blog added successfully', json)
             dispatch({ type: 'CREATE_BLOG', payload: json })
+            navigate('/')
         }
 
     }

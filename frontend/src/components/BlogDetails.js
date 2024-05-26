@@ -12,14 +12,17 @@ import {
 import { useBlogsContext } from '../hooks/useBlogsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 
-const BlogDetails = ({ blog }) => {
+const BlogDetails = ({ blog, showDeleteButton }) => {
   const { dispatch } = useBlogsContext()
   const { user } = useAuthContext()
 
   const handleClick = async () => {
 
     const res = await fetch('/blogs/' + blog._id, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${user.token}`
+      }
     })
     const data = await res.json()
     if (res.ok) {
@@ -43,7 +46,7 @@ const BlogDetails = ({ blog }) => {
         <MDBCardTitle>{blog.title}</MDBCardTitle>
         <MDBCardText>{blog.content}</MDBCardText>
         <MDBCardSubTitle>author: {blog.author}</MDBCardSubTitle>
-        {user && <MDBBtn onClick={handleClick}>delete</MDBBtn>}
+        {showDeleteButton && user && <MDBBtn onClick={handleClick}>delete</MDBBtn>}
       </MDBCardBody>
       <MDBCardFooter className='text-muted'>2 days ago</MDBCardFooter>
     </MDBCard>

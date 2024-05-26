@@ -31,6 +31,9 @@ const Navbar = () => {
                             <Link to='/about'>About</Link>
                         </li>
                         <li>
+                            <Link to='/myblogs'>My Blogs</Link>
+                        </li>
+                        <li>
                         <button onClick={handleClick}>Log-out</button>
                         </li>
                     </>

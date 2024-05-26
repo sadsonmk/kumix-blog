@@ -16,9 +16,9 @@ export default function Footer() {
       <MDBContainer className='p-4 pb-0'>
         <section className=''>
           <p className='d-flex justify-content-center align-items-center'>
-            <span className='me-3'>Register for free</span>
+            {user ? <span className='me-3'>Logged In</span> : <span className='me-3'>Register for free</span> }
 
-            <MDBBtn type='button' outline color="light" rounded>
+            <MDBBtn type='button' outline color="light" rounded disabled={!!user}>
               {user ? `Welcome ${user.email}` : <Link to='/signup'>Sign up</Link>}
             </MDBBtn>
 

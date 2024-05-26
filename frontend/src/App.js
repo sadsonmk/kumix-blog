@@ -6,7 +6,7 @@ import Footer from './components/Footer';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import About from './pages/About';
-
+import MyBlogs from './pages/MyBlogs';
 
 function App() {
 
@@ -21,6 +21,7 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<Signup />} />
             <Route path='/about' element={<About />} />
+            <Route path='/myblogs' element={<MyBlogs />} />
           </Routes>
         </div>
         <Footer />
