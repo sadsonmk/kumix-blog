@@ -33,7 +33,7 @@ const Home = () => {
   return (
     <div className='home'>
         <HeroSection />
-        <h3 className='blog-heading'>Recent Blogs</h3>
+        <h3 className='blog-heading space'>Recent Blogs</h3>
         <div className='blogs'>
             {blogs && blogs.map(blog => (
                 <BlogDetails key={blog._id} blog={blog} />

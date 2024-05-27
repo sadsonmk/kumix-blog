@@ -11,6 +11,9 @@ import {
 export default function TestimonialSlider () {
   return (
     <MDBContainer className="my-5">
+      <div className='p-5 text-center bg-light'>
+        <h3 className='mb-3'>Testimonials</h3>
+      </div>
       <MDBCarousel showControls dark>
 
           <MDBCarouselItem className="active text-center">
