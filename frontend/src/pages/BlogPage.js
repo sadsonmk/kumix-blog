@@ -4,6 +4,7 @@ import { useBlogsContext } from '../hooks/useBlogsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 import { Modal, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const BlogPage = () => {
   const { id } = useParams();
@@ -58,8 +59,16 @@ const BlogPage = () => {
   return (
     <div>
       <h1>{blog.title}</h1>
-      <p>{blog.content}</p>
-      {user && <button onClick={handleShowModal}>Delete</button>}
+      {/* <p>{blog.content}</p> */}
+      {blog.content.split('\n').map((paragraph, index) => (
+      <p key={index}>{paragraph}</p>
+      ))}
+      {user &&
+      <>
+      <button onClick={handleShowModal}>Delete the Blog</button>
+      <Link to={`/update/${id}`}><button>Edit the Blog</button></Link>
+      </>
+      }
 
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
