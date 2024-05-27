@@ -45,7 +45,7 @@ const BlogDetails = ({ blog }) => {
       <MDBCardHeader>Tip</MDBCardHeader>
       <MDBCardBody>
         <MDBCardTitle>{blog.title}</MDBCardTitle>
-        <MDBCardText>{blog.content}</MDBCardText>
+        <MDBCardText>{blog.content.substring(0, 50)}...</MDBCardText>
         <MDBCardSubTitle>author: {blog.author}</MDBCardSubTitle>
         {/* {showDeleteButton && user && <MDBBtn onClick={handleClick}>delete</MDBBtn>} */}
         <Link to={`/blog/${blog._id}`}>

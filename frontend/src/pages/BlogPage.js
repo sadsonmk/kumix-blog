@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useBlogsContext } from '../hooks/useBlogsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 import { Modal, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const BlogPage = () => {
   const { id } = useParams();
@@ -10,6 +11,7 @@ const BlogPage = () => {
   const { dispatch } = useBlogsContext()
   const { user } = useAuthContext()
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
@@ -38,7 +40,7 @@ const BlogPage = () => {
 
   const handleClick = async () => {
     if (showModal) {
-      const res = await fetch(`/api/blogs/${id}`, {
+      const res = await fetch(`/blogs/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -48,6 +50,7 @@ const BlogPage = () => {
       const data = await res.json()
       if (res.ok) {
         dispatch({ type: 'DELETE_BLOG', payload: data })
+        navigate('/')
       }
     }
   }
