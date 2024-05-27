@@ -1,10 +1,14 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useBlogsContext } from '../hooks/useBlogsContext'
 import BlogDetails from '../components/BlogDetails'
 import HeroSection from '../components/HeroSection'
+import VisitedBlogs from '../components/VisitedBlogs';
+
 
 const Home = () => {
     const {blogs, dispatch} = useBlogsContext()
+    const [visitedBlogs, setVisitedBlogs] = useState([]);
+
     useEffect(() => {
         const fetchBlogs = async () => {
             const res = await fetch('/blogs')
@@ -15,14 +19,30 @@ const Home = () => {
         }
         fetchBlogs()
     }, [dispatch])
+
+    useEffect(() => {
+        const fetchVisitedBlogs = async () => {
+          const ids = JSON.parse(localStorage.getItem('visitedBlogs')) || [];
+          const blogs = await Promise.all(ids.map(id => fetch(`/blogs/${id}`).then(res => res.json())));
+          setVisitedBlogs(blogs);
+        };
+        fetchVisitedBlogs();
+      }, []);
+
   return (
     <div className='home'>
         <HeroSection />
+        <h2 className='blog-heading'>Recent Blogs</h2>
         <div className='blogs'>
             {blogs && blogs.map(blog => (
                 <BlogDetails key={blog._id} blog={blog} />
             ))}
+
         </div>
+        <div className='visited' >
+            <VisitedBlogs visitedBlogs={visitedBlogs} />
+        </div>
+
     </div>
   )
 }

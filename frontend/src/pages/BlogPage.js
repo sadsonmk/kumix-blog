@@ -14,12 +14,19 @@ const BlogPage = () => {
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
 
-
+  const updateVisitedBlogs = (id) => {
+    let visitedBlogs = JSON.parse(localStorage.getItem('visitedBlogs')) || [];
+    if (!visitedBlogs.includes(id)) {
+      visitedBlogs.push(id);
+      localStorage.setItem('visitedBlogs', JSON.stringify(visitedBlogs));
+    }
+  }
   useEffect(() => {
     const fetchBlog = async () => {
       const response = await fetch(`/blogs/${id}`);
       const data = await response.json();
       setBlog(data);
+      updateVisitedBlogs(id);
     };
 
     fetchBlog();

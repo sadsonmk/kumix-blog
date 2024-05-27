@@ -16,8 +16,8 @@ const Navbar = () => {
             <Link to='/'>
                 <h1>Kumix blogs</h1>
             </Link>
-            <nav>
-                <ul>
+            <nav >
+                <ul className='nav-links'>
                     { user && (
                     <>
                         <span>Welcome {user.email}</span>
