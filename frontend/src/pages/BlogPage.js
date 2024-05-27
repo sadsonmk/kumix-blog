@@ -66,6 +66,7 @@ const BlogPage = () => {
       {user &&
       <>
       <button onClick={handleShowModal}>Delete the Blog</button>
+      <span className='space'></span>
       <Link to={`/update/${id}`}><button>Edit the Blog</button></Link>
       </>
       }

@@ -4,6 +4,7 @@ import BlogDetails from '../components/BlogDetails'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 
+
 const token = localStorage.getItem('user')
 const MyBlogs = () => {
     const {blogs, dispatch} = useBlogsContext()
@@ -31,12 +32,13 @@ const MyBlogs = () => {
     console.log(displayedBlogs)
     return (
         <div className='home'>
-
+            <h3 className='blog-heading'>My Blogs</h3>
             <div className='blogs'>
                 {displayedBlogs && displayedBlogs.map(blog => (
                     <BlogDetails key={blog._id} blog={blog} />
                 ))}
             </div>
+
         </div>
     )
 }

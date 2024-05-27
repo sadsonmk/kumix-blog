@@ -26,6 +26,7 @@ function App() {
             <Route path='/myblogs' element={<MyBlogs />} />
             <Route path='/blog/:id' element={<BlogPage />} />
             <Route path='/update/:id' element={<UpdateBlog />} />
+            <Route path='*' element={<h1>Not Found</h1>} />
           </Routes>
         </div>
         <Footer />

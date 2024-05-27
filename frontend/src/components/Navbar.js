@@ -14,7 +14,7 @@ const Navbar = () => {
     <header>
         <div className='container'>
             <Link to='/'>
-                <h1>Kumix blogs</h1>
+                <h2>Kumix blogs</h2>
             </Link>
             <nav >
                 <ul className='nav-links'>
@@ -31,7 +31,7 @@ const Navbar = () => {
                             <Link to='/about'>About</Link>
                         </li>
                         <li>
-                            <Link to='/myblogs'>My Blogs</Link>
+                            <Link to='/myblogs'>My-Blogs</Link>
                         </li>
                         <li>
                         <button onClick={handleClick}>Log-out</button>

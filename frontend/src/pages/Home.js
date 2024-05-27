@@ -3,6 +3,7 @@ import { useBlogsContext } from '../hooks/useBlogsContext'
 import BlogDetails from '../components/BlogDetails'
 import HeroSection from '../components/HeroSection'
 import VisitedBlogs from '../components/VisitedBlogs';
+import TestimonialSlider from '../components/TestimonialSlider';
 
 
 const Home = () => {
@@ -32,7 +33,7 @@ const Home = () => {
   return (
     <div className='home'>
         <HeroSection />
-        <h2 className='blog-heading'>Recent Blogs</h2>
+        <h3 className='blog-heading'>Recent Blogs</h3>
         <div className='blogs'>
             {blogs && blogs.map(blog => (
                 <BlogDetails key={blog._id} blog={blog} />
@@ -42,6 +43,7 @@ const Home = () => {
         <div className='visited' >
             <VisitedBlogs visitedBlogs={visitedBlogs} />
         </div>
+        <TestimonialSlider />
 
     </div>
   )
