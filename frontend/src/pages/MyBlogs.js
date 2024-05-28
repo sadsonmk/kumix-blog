@@ -1,9 +1,10 @@
 import { useBlogsContext } from '../hooks/useBlogsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 import BlogDetails from '../components/BlogDetails'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Accordion from 'react-bootstrap/Accordion';
+import MyPagination from '../components/MyPagination';
 
 
 const token = localStorage.getItem('user')
@@ -12,10 +13,16 @@ const MyBlogs = () => {
     const { user } = useAuthContext()
     const navigate = useNavigate()
 
+    const [currentPage, setCurrentPage] = useState(1)
+    const [blogsPerPage] = useState(8)
+    const [loading, setLoading] = useState(false)
+
     useEffect(() => {
         const fetchBlogs = async () => {
-            const res = await fetch('/blogs')
+            setLoading(true)
+            const res = await fetch(`/blogs?`)
             const data = await res.json()
+            setLoading(false)
             if (res.ok) {
                 dispatch({ type: 'SET_BLOGS', payload: data})
             }
@@ -31,15 +38,33 @@ const MyBlogs = () => {
 
     const displayedBlogs = user ? blogs.filter(blog => blog.userId === user.id) : []
     console.log(displayedBlogs)
+
+    const indexOfLastBlog = currentPage * blogsPerPage
+    const indexOfFirstBlog = indexOfLastBlog - blogsPerPage
+    const currentBlogs = displayedBlogs.slice(indexOfFirstBlog, indexOfLastBlog)
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber)
+    if (loading) {
+        return <h3>Loading...</h3>
+    }
     return (
         <div className='home'>
             <h3 className='blog-heading'>My Blogs</h3>
             <div className='blogs'>
-                {displayedBlogs && displayedBlogs.map(blog => (
+                {currentBlogs && currentBlogs.map(blog => (
                     <BlogDetails key={blog._id} blog={blog} />
                 ))}
             </div>
-                <span className='space'></span>
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+            <MyPagination
+            blogsPerPage={blogsPerPage}
+            totalBlogs={blogs.length}
+            currentPage={currentPage}
+            paginate={paginate}
+            />
+        </div>
+
+            <span className='space'></span>
         <Accordion defaultActiveKey="0">
             <Accordion.Item eventKey="0">
                 <Accordion.Header>My thoughts</Accordion.Header>

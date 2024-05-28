@@ -14,7 +14,7 @@ const Navbar = () => {
     <header>
         <div className='container'>
             <Link to='/'>
-                <h2>Kumix blogs</h2>
+                <h3>Kumix blogs®</h3>
             </Link>
             <nav >
                 <ul className='nav-links'>
