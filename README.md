@@ -23,7 +23,7 @@ Its in development mode
 
 ## Running the tests
 
-Explain how to run the automated tests for this system.
+run javascript tests
 
 ## Built With
 
@@ -38,7 +38,7 @@ Not open for contributions yet
 
 ## Authors
 
-- **Your Name** - *Initial work* - [Sadsonmk](https://github.com/sadsonmk)
+- **Sadson Mkumira** - *Initial work* - [Sadsonmk](https://github.com/sadsonmk)
 
 
 ## License
