@@ -16,6 +16,10 @@ export const blogsReducer =  (state, action) => {
             return {
                 blogs: state.blogs.filter(blog => blog._id !== action.payload._id)
             }
+        case 'UPDATE_BLOG':
+            return {
+                blogs: state.blogs.map(blog => blog._id === action.payload._id ? action.payload : blog)
+            }
         default:
             return state
     }

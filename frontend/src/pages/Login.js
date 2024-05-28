@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useLogin } from '../hooks/useLogin'
+import { Link } from 'react-router-dom'
 
 const Login = () => {
 
@@ -7,11 +8,10 @@ const Login = () => {
     const [password, setPassword] = useState('')
     const { login, error, loading } = useLogin()
 
+
     const handleSubmit = async (e) => {
         e.preventDefault()
-
         await login(email, password)
-
     }
 
   return (
@@ -44,6 +44,7 @@ const Login = () => {
     </div>
     <div className="row">
       <input type="submit" value="Login" disabled={loading} />
+      <Link to="/signup">Don't have an account? Sign up</Link>
     </div>
     {error && <div className="alert">
     <span className="closebtn" onClick={(e) => e.target.parentElement.style.display='none'}>&times;</span>

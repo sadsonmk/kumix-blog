@@ -14,10 +14,10 @@ const Navbar = () => {
     <header>
         <div className='container'>
             <Link to='/'>
-                <h1>Kumix blogs</h1>
+                <h3>Kumix blogs®</h3>
             </Link>
-            <nav>
-                <ul>
+            <nav >
+                <ul className='nav-links'>
                     { user && (
                     <>
                         <span>Welcome {user.email}</span>
@@ -25,13 +25,16 @@ const Navbar = () => {
                             <Link to='/'>Home</Link>
                         </li>
                         <li>
-                            <Link to='/create'>Create</Link>
+                            <Link to='/create'>Create-blog</Link>
                         </li>
                         <li>
                             <Link to='/about'>About</Link>
                         </li>
                         <li>
-                        <button onClick={handleClick}>Log out</button>
+                            <Link to='/myblogs'>My-Blogs</Link>
+                        </li>
+                        <li>
+                        <button onClick={handleClick}>Log-out</button>
                         </li>
                     </>
                     )}
@@ -45,7 +48,7 @@ const Navbar = () => {
                             <Link to='/about'>About</Link>
                         </li>
                         <li>
-                            <Link to='/signup'>Sign up</Link>
+                            <Link to='/signup'>Sign-up</Link>
                         </li>
                         <li>
                             <Link to='/login'>Login</Link>

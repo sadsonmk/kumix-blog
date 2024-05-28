@@ -1,24 +1,23 @@
 import { useState } from 'react'
 import './Create.css'
 import { useSignup } from '../hooks/useSignup'
+import { Link } from 'react-router-dom'
+
 
 const Signup = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const { signup, error, loading } = useSignup()
-
     const handleSubmit = async (e) => {
         e.preventDefault()
-
         await signup(email, password)
-
     }
 
   return (
     <div className="cont">
-  <form className='create' onSubmit={handleSubmit}>
-    <div className="row">
+    <form className='create' onSubmit={handleSubmit}>
+      <div className="row">
         <h3>Sign Up</h3>
       <div className="col-25">
         <label>Email</label>
@@ -43,8 +42,9 @@ const Signup = () => {
         />
       </div>
     </div>
-    <div className="row">
+    <div className="row" >
       <input type="submit" value="Sign Up" disabled={loading}/>
+      <Link to="/login">Already have an account? Sign in</Link>
     </div>
     {error && <div className="alert">
     <span className="closebtn" onClick={(e) => e.target.parentElement.style.display='none'}>&times;</span>

@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react'
 import './Create.css'
 import { useBlogsContext } from '../hooks/useBlogsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
-const Create = () => {
+const UpdateBlog = () => {
+    const { id } = useParams();
     const { user } = useAuthContext()
     const { dispatch } = useBlogsContext()
     const [title, setTitle] = useState('')
@@ -15,24 +16,35 @@ const Create = () => {
 
     const token = localStorage.getItem('user')
     const navigate = useNavigate();
+
     useEffect(() => {
-        if (!token) {
+        const fetchBlog = async () => {
+            const response = await fetch(`/blogs/${id}`);
+            const blog = await response.json();
+            setTitle(blog.title);
+            setAuthor(blog.author);
+            setContent(blog.content);
+        };
+
+        if (token) {
+            fetchBlog();
+        } else {
             navigate('/login');
         }
-    }, [token, navigate]);
+    }, [id, token, navigate]);
 
     const handleSubmitBlog = async (ev) => {
         ev.preventDefault()
 
         if (!user) {
-            setError('You must be logged in to create a blog')
+            setError('You must be logged in to edit a blog')
             return
         }
 
 
         const blog = { title, author, content }
-        const response = await fetch('/blogs', {
-            method: 'POST',
+        const response = await fetch(`/blogs/${id}`, {
+            method: 'PATCH',
             headers: { "Content-Type": "application/json",
               'Authorization': `Bearer ${JSON.parse(token).token}`
              },
@@ -43,14 +55,15 @@ const Create = () => {
         if(!response.ok) {
             setError(json.error)
         }
+        console.log(json)
         if (response.ok) {
             setTitle('')
             setAuthor('')
             setContent('')
             setError(null)
-            console.log('Blog added successfully', json)
-            dispatch({ type: 'CREATE_BLOG', payload: json })
-            navigate('/')
+            console.log('Blog edited successfully', json)
+            dispatch({ type: 'UPDATE_BLOG', payload: json })
+            navigate(`/blog/${json._id}`)
         }
 
     }
@@ -109,4 +122,4 @@ const Create = () => {
   )
 }
 
-export default Create
+export default UpdateBlog

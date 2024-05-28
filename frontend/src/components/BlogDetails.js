@@ -8,42 +8,34 @@ import {
   MDBCardFooter,
   MDBBtn
 } from 'mdb-react-ui-kit';
-
-import { useBlogsContext } from '../hooks/useBlogsContext'
+import { Link } from 'react-router-dom'
+import { differenceInDays, differenceInHours, differenceInMinutes } from 'date-fns'
 
 const BlogDetails = ({ blog }) => {
-  const { dispatch } = useBlogsContext()
 
-  const handleClick = async () => {
-
-    const res = await fetch('/blogs/' + blog._id, {
-      method: 'DELETE'
-    })
-    const data = await res.json()
-    if (res.ok) {
-      dispatch({ type: 'DELETE_BLOG', payload: data })
-    }
-  }
-
+  const createdAt = new Date(blog.createdAt)
+  const daysAgo = differenceInDays(new Date(), createdAt)
+  const hoursAgo = differenceInHours(new Date(), createdAt)
+  const minutesAgo = differenceInMinutes(new Date(), createdAt)
 
   return (
-    // <div className='blog-details'>
-    //     <h3>{blog.title}</h3>
-    //     <p><strong>tip: </strong>{blog.content}</p>
-    //     <p><strong>author: </strong>{blog.author}</p>
-    //     <p>{blog.createdAt}</p>
-    //     <span onClick={handleClick}>delete</span>
-    // </div>
     <div className='blog-details'>
     <MDBCard alignment='center'>
-      <MDBCardHeader>Tip</MDBCardHeader>
+      <MDBCardHeader>Facts and Opinions</MDBCardHeader>
       <MDBCardBody>
         <MDBCardTitle>{blog.title}</MDBCardTitle>
-        <MDBCardText>{blog.content}</MDBCardText>
+        <MDBCardText>{blog.content.substring(0, 50)}...</MDBCardText>
         <MDBCardSubTitle>author: {blog.author}</MDBCardSubTitle>
-        <MDBBtn onClick={handleClick}>delete</MDBBtn>
+        {/* {showDeleteButton && user && <MDBBtn onClick={handleClick}>delete</MDBBtn>} */}
+        <Link to={`/blog/${blog._id}`}>
+          <MDBBtn>Read more...</MDBBtn>
+        </Link>
       </MDBCardBody>
-      <MDBCardFooter className='text-muted'>2 days ago</MDBCardFooter>
+      <MDBCardFooter className='text-muted'>
+      {minutesAgo < 60 ? `${minutesAgo} minutes ago` :
+     hoursAgo < 24 ? `${hoursAgo} hours ago` :
+     `${daysAgo} days ago`}
+      </MDBCardFooter>
     </MDBCard>
     </div>
   )

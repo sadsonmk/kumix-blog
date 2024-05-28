@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { useAuthContext } from "./useAuthContext";
+//import { useAuthContext } from "./useAuthContext";
+import { useNavigate } from "react-router-dom";
 
 export const useSignup = () => {
-    const { dispatch } = useAuthContext();
+    //const { dispatch } = useAuthContext();
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(null);
+    const navigate = useNavigate()
 
     const signup = async (email, password) => {
         setLoading(true);
@@ -27,8 +29,10 @@ export const useSignup = () => {
             // Save the user in localStorage
             localStorage.setItem('user', JSON.stringify(json));
             // update user in the AuthContext
-            dispatch({ type: 'LOGIN', payload: json });
+            //dispatch({ type: 'LOGIN', payload: json });
             setLoading(false);
+            alert('Signup successful')
+            navigate('/login')
         }
     }
     return { signup, error, loading }
