@@ -63,7 +63,7 @@ const BlogPage = () => {
       {blog.content.split('\n').map((paragraph, index) => (
       <p key={index}>{paragraph}</p>
       ))}
-      {user &&
+      {user && user.id === blog.userId &&
       <>
       <button onClick={handleShowModal}>Delete the Blog</button>
       <span className='space'></span>

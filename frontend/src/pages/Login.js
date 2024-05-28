@@ -8,11 +8,10 @@ const Login = () => {
     const [password, setPassword] = useState('')
     const { login, error, loading } = useLogin()
 
+
     const handleSubmit = async (e) => {
         e.preventDefault()
-
         await login(email, password)
-
     }
 
   return (

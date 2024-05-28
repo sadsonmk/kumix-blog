@@ -8,6 +8,7 @@ import MyPagination from '../components/MyPagination';
 
 
 const token = localStorage.getItem('user')
+
 const MyBlogs = () => {
     const {blogs, dispatch} = useBlogsContext()
     const { user } = useAuthContext()
@@ -27,7 +28,7 @@ const MyBlogs = () => {
                 dispatch({ type: 'SET_BLOGS', payload: data})
             }
         }
-    if (JSON.parse(token)) {
+    if (JSON.parse(token).token) {
         fetchBlogs()
     } else {
         navigate('/login')
@@ -51,8 +52,11 @@ const MyBlogs = () => {
         <div className='home'>
             <h3 className='blog-heading'>My Blogs</h3>
             <div className='blogs'>
-                {currentBlogs && currentBlogs.map(blog => (
-                    <BlogDetails key={blog._id} blog={blog} />
+                {displayedBlogs.length === 0 ? (
+                    <p>No blogs yet</p>
+                ) : (
+                currentBlogs && currentBlogs.map(blog => (
+                    <BlogDetails key={blog._id} blog={blog} />)
                 ))}
             </div>
         <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
